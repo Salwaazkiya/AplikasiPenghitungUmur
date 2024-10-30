@@ -40,12 +40,13 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         txtHariUlangTahunBerikutnya = new javax.swing.JTextField();
         btnHitung = new javax.swing.JButton();
         btnKeluar = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaPeristiwa = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aplikasi Penghitung Umur", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24))); // NOI18N
         jPanel1.setToolTipText("");
         jPanel1.setName("Aplikasi Penghitung Umur"); // NOI18N
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -84,7 +85,7 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.ipadx = 38;
         jPanel1.add(dateChooserTanggalLahir, gridBagConstraints);
 
         txtUmur.addActionListener(new java.awt.event.ActionListener() {
@@ -133,29 +134,27 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 8, 0, 0);
         jPanel1.add(btnKeluar, gridBagConstraints);
 
-        jPanel2.setLayout(new java.awt.GridLayout());
-
         txtAreaPeristiwa.setColumns(20);
         txtAreaPeristiwa.setRows(20);
         jScrollPane1.setViewportView(txtAreaPeristiwa);
-
-        jPanel2.add(jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -171,8 +170,7 @@ public class PenghitungUmurFrame extends javax.swing.JFrame {
     Date tanggalLahir = dateChooserTanggalLahir.getDate();
  if (tanggalLahir != null) {
  // Menghitung umur dan hari ulang tahun berikutnya
- LocalDate lahir =
-tanggalLahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+ LocalDate lahir = tanggalLahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
  LocalDate sekarang = LocalDate.now();
  String umur = helper.hitungUmurDetail(lahir, sekarang);
  txtUmur.setText(umur);
@@ -184,7 +182,7 @@ helper.getDayOfWeekInIndonesian(ulangTahunBerikutnya);
  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     String tanggalUlangTahunBerikutnya = ulangTahunBerikutnya.format(formatter);
     txtHariUlangTahunBerikutnya.setText(hariUlangTahunBerikutnya + " (" + tanggalUlangTahunBerikutnya + ")");
- }
+    
     // Set stop flag untuk thread sebelumnya
 stopFetching = true;
 if (peristiwaThread != null && peristiwaThread.isAlive()) {
@@ -210,7 +208,7 @@ txtAreaPeristiwa.append("Selesai mengambil data peristiwa"));
     peristiwaThread.start();
 // TODO add your handling code here:
     }//GEN-LAST:event_btnHitungActionPerformed
-       
+    }  
 
     
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
@@ -272,7 +270,6 @@ txtAreaPeristiwa.setText("");// TODO add your handling code here:
     private javax.swing.JButton btnKeluar;
     private com.toedter.calendar.JDateChooser dateChooserTanggalLahir;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelHariBerikutnya;
     private javax.swing.JLabel labelTanggal;
